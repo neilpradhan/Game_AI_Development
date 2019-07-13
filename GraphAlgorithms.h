@@ -79,6 +79,11 @@ private:
   bool Depth_Limited_Search(int , int, int);
   // done declaring
 
+  // Here will be my Iterative Deepening Depth First Traversal function 
+  bool Iterative_Deepening_Depth_First_Traversal(int , int , int);
+
+
+
 
 public:
 // constructor
@@ -116,7 +121,8 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-// here I need to change for Iterative Deepening Depth First search
+// Neil Pradhan
+//  Iterative Deepening Depth First search Addtion by 
 // src is the
 // Remember that search returns if path is found
 
@@ -142,6 +148,28 @@ bool Graph_SearchDFS<graph_type>:: Depth_Limited_Search(int src, int target, int
 
 
 }
+// the function Depth limited Search ends here
+// Neil Pradhan
+
+
+
+// this function is for Iterative Deepening First Traversal Graph Search will suggest if for a depth is it possible to find the path
+template <class graph_type>
+bool Graph_SearchDFS<graph_type>:: Iterative_Deepening_Depth_First_Traversal(int src, int target, int maxDepth)
+
+{
+	
+// we will use a for loop to do Depth limited Search in cycles until the maximum Depth that we set is reached
+	// In other words, we can avoid memory leaking problem by asking the pc to stop after a certain Depth
+    for (int i = 0; i <= maxDepth; i++) 
+       if (Depth_Limited_Search(src, target, i) == true) 
+          return true; 
+  
+    return false; 
+
+
+}
+
 
 
 
@@ -203,7 +231,7 @@ bool Graph_SearchDFS<graph_type>::Search()
       if (m_Visited[pE->To()] == unvisited)
       {
 		  // wrting for depth limited search
-		  if (Depth_Limited_Search( m_iSource,  m_iTarget, 5)==true)
+		  if (Iterative_Deepening_Depth_First_Traversal(m_iSource ,m_iTarget,5)==true)
 		  {
 			  stack.push(pE);
 		  }
